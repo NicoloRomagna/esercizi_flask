@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}{{ channel['nome'] }} - Mini YouTube{% endblock %}
+{% block content %}
+<h1>{{ channel['nome'] }}</h1>
+<p class="text-muted">
+  Categoria: {{ channel['categoria'] }} — Iscritti: {{ channel['numero_iscritti'] }}
+</p>
+
+{% if session.get('user') %}
+  <a href="{{ url_for('main.create_video', channel_id=channel['id']) }}"
+     class="btn btn-success mb-3">Aggiungi Video</a>
+{% endif %}
+
+<h2>Video</h2>
+<div class="row">
+  {% for v in videos %}
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        {% if v['immagine'] %}
+          <img src="{{ v['immagine'] }}" class="card-img-top" alt="{{ v['titolo'] }}">
+        {% else %}
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="180"
+               xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder"
+               preserveAspectRatio="xMidYMid slice" focusable="false">
+            <title>{{ v['titolo'] }}</title>
+            <rect width="100%" height="100%" fill="#868e96"></rect>
+            <text x="50%" y="50%" fill="#dee2e6" dy=".3em" text-anchor="middle">
+              Nessuna immagine
+            </text>
+          </svg>
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ v['titolo'] }}</h5>
+          <p class="card-text">
+            Durata: {{ v['durata'] }} secondi
+          </p>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <p>Nessun video per questo canale.</p>
+  {% endfor %}
+</div>
+{% endblock %}

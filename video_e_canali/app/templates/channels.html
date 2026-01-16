@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Canali - Mini YouTube{% endblock %}
+{% block content %}
+<h1 class="mb-3">Tutti i Canali</h1>
+
+{% if session.get('user') %}
+  <a href="{{ url_for('main.create_channel') }}" class="btn btn-primary mb-3">Crea nuovo canale</a>
+{% endif %}
+
+<ul class="list-group">
+  {% for c in channels %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <a href="{{ url_for('main.channel_detail', channel_id=c['id']) }}">
+          {{ c['nome'] }}
+        </a>
+        <div class="small text-muted">
+          Categoria: {{ c['categoria'] }} — Iscritti: {{ c['numero_iscritti'] }}
+        </div>
+      </div>
+    </li>
+  {% else %}
+    <li class="list-group-item">Nessun canale presente.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

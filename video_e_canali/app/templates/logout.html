@@ -1,0 +1,10 @@
+
+from flask import Blueprint, session, redirect, url_for, flash
+
+bp = Blueprint("logout", __name__, url_prefix="/auth")
+
+@bp.route("/logout")
+def logout():
+    session.pop("user", None)
+    flash("Logout effettuato.", "info")
+    return redirect(url_for("main.index"))

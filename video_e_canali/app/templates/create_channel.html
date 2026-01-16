@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Nuovo Canale - Mini YouTube{% endblock %}
+{% block content %}
+<h1>Crea un nuovo canale</h1>
+<form method="post" class="mt-3">
+  <div class="mb-3">
+    <label for="nome" class="form-label">Nome</label>
+    <input type="text" class="form-control" id="nome" name="nome" required>
+  </div>
+  <div class="mb-3">
+    <label for="categoria" class="form-label">Categoria</label>
+    <input type="text" class="form-control" id="categoria" name="categoria" required>
+  </div>
+  <div class="mb-3">
+    <label for="numero_iscritti" class="form-label">Numero iscritti</label>
+    <input type="number" class="form-control" id="numero_iscritti" name="numero_iscritti" value="0" min="0">
+  </div>
+  <button type="submit" class="btn btn-primary">Crea</button>
+</form>
+{% endblock %}
